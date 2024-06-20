@@ -14,6 +14,9 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 add_executable(myShell
   main.cpp
+  smsh.h
+  makestring.cpp
+  execute.cpp
 )
 target_link_libraries(myShell Qt${QT_VERSION_MAJOR}::Core)
 

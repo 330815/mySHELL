@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <stdlib.h>
+#include "smsh.h"
 
 #define MAXARGS 20  //cmdline args
 #define ARGLEN 100  //token length
@@ -48,27 +49,6 @@ int main(int argc, char *argv[])
     }
 
     return a.exec();
-}
-
-//获取输入的每个命令
-char *makestring(char *buf){
-    char *cp;
-
-    buf[strlen(buf)-1] = '\0';
-    cp = (char *)malloc(strlen(buf)+1);
-    if (cp == NULL){
-        fprintf(stderr,"no memory\n");
-        exit(1);
-    }
-    strcpy(cp,buf);
-    return cp;
-}
-
-//执行命令
-int execute(char *arglist[]){
-    execvp(arglist[0],arglist);
-    perror("execute failed");
-    exit(1);
 }
 
 
