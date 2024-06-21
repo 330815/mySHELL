@@ -1,11 +1,9 @@
 #include <QCoreApplication>
-#include <string>
-#include <iostream>
-#include <stdlib.h>
 #include "smsh.h"
 
 #define MAXARGS 20  //cmdline args
 #define ARGLEN 100  //token length
+#define DEL_PROMPT ">"
 
 int main(int argc, char *argv[])
 {
@@ -27,30 +25,55 @@ int main(int argc, char *argv[])
 
     //v2.0
     /* 单独地输入命令字符串，将字符串一个一个地加入arglist字符串数组中 */
-    char *arglist[MAXARGS + 1];
-    int numargs;
-    char argbuf[ARGLEN];
-    numargs = 0;
+//    char *arglist[MAXARGS + 1];
+//    int numargs;
+//    char argbuf[ARGLEN];
+//    numargs = 0;
 
-    while(numargs < MAXARGS){
-        std::cout<<">"<<numargs;
-        if(fgets(argbuf,ARGLEN,stdin) && *argbuf != '\n')   //单独地输入每个命令，直到输入为换行符
-            arglist[numargs++] = makestring(argbuf);
-        else {
-            if(numargs >0){
-                arglist[numargs] = NULL;
-//                execute2(arglist);
-                execute3(arglist);
-                numargs = 0;
-            }
+//    while(numargs < MAXARGS){
+//        std::cout<<">"<<numargs;
+//        if(fgets(argbuf,ARGLEN,stdin) && *argbuf != '\n')   //单独地输入每个命令，直到输入为换行符
+//            arglist[numargs++] = makestring(argbuf);
+//        else {
+//            if(numargs >0){
+//                arglist[numargs] = NULL;
+////                execute2(arglist);  //v2.0
+//                execute3(arglist);    //v3.0
+//                numargs = 0;
+//            }
+//        }
+//    }
+
+
+    //v4.0
+
+    char *cmdline,*prompt,**arglist;
+    int result;
+    void setup();
+
+    prompt = DEL_PROMPT;
+    setup();
+
+    while ((cmdline = next_cmd(prompt,stdin)) != NULL) {
+        if((arglist = splitline(cmdline)) != NULL){
+            result = execute4(arglist);
+            freelist(arglist);
         }
+        free(cmdline);
     }
 
     return a.exec();
 }
 
+void setup(){
+    signal(SIGINT,SIG_IGN);
+    signal(SIGQUIT,SIG_IGN);
+}
 
-
+void fatal(char *s1,char *s2,int n){
+    std::fprintf(stderr,"Error:%s,%s\n",s1,s2);
+    exit(n);
+}
 
 
 

@@ -26,3 +26,27 @@ void execute3(char *arglist[]){
         std::cout<<"child exited with status"<<(exitstatus>>8)<<","<<(exitstatus&0377)<<std::endl;
     }
 }
+
+
+int execute4(char *arglist[]){
+    int pid;
+    int child_info = -1;
+
+    if(arglist[0]==NULL)
+        return 0;
+    if((pid = fork()) == -1)
+        perror("fork failed");
+    else if (pid == 0) {
+        signal(SIGINT,SIG_DFL);
+        signal(SIGQUIT,SIG_DFL);
+        execvp(arglist[0],arglist);
+        perror("execvp failed");
+        exit(1);
+    }
+    else {
+        if(wait(&child_info) == -1){
+            perror("wait");
+        }
+        return child_info;
+    }
+}
