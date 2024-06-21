@@ -13,12 +13,12 @@ char *makestring(char *buf){
         fprintf(stderr,"no memory\n");
         exit(1);
     }
-    strcpy(cp,buf);
+    strncpy(cp,buf,sizeof(cp));
     return cp;
 }
 
 
-char *next_cmd(char *prompt,FILE *fp){
+char *next_cmd(const char *prompt,FILE *fp){
     char *buf;
     int bufspace = 0;
     int pos = 0;

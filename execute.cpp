@@ -49,4 +49,5 @@ int execute4(char *arglist[]){
         }
         return child_info;
     }
+    return 0;
 }

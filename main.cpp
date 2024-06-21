@@ -47,11 +47,11 @@ int main(int argc, char *argv[])
 
     //v4.0
 
-    char *cmdline,*prompt,**arglist;
+    char *cmdline,**arglist;
     int result;
     void setup();
 
-    prompt = DEL_PROMPT;
+    const char *prompt = DEL_PROMPT;
     setup();
 
     while ((cmdline = next_cmd(prompt,stdin)) != NULL) {
@@ -70,7 +70,7 @@ void setup(){
     signal(SIGQUIT,SIG_IGN);
 }
 
-void fatal(char *s1,char *s2,int n){
+void fatal(const char *s1,const char *s2,int n){
     std::fprintf(stderr,"Error:%s,%s\n",s1,s2);
     exit(n);
 }
