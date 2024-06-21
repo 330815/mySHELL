@@ -1,4 +1,5 @@
 #include "smsh.h"
+
 char *makestring(char *buf){
     char *cp;
 

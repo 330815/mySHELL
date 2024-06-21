@@ -30,9 +30,6 @@ int main(int argc, char *argv[])
     char *arglist[MAXARGS + 1];
     int numargs;
     char argbuf[ARGLEN];
-    char *makestring(char *buf);    //获取输入的每个命令
-    int execute(char *arglist[]);   //执行命令
-
     numargs = 0;
 
     while(numargs < MAXARGS){
@@ -42,7 +39,8 @@ int main(int argc, char *argv[])
         else {
             if(numargs >0){
                 arglist[numargs] = NULL;
-                execute(arglist);
+//                execute2(arglist);
+                execute3(arglist);
                 numargs = 0;
             }
         }
