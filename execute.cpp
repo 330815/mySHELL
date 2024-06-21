@@ -85,3 +85,17 @@ int execute4(char *arglist[]){
     }
     return 0;
 }
+
+// process.c
+int execute5(char *arglist[]){
+
+    int	rv = 0;
+
+    if ( arglist[0] == NULL )
+        rv = 0;
+    else if ( is_control_command(arglist[0]) )
+        rv = do_control_command(arglist);
+    else if ( ok_to_execute() )
+        rv = execute4(arglist);
+    return rv;
+}

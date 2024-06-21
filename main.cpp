@@ -47,22 +47,41 @@ int main(int argc, char *argv[])
 
     //v4.0
 
-    char *cmdline,**arglist;
-    int result;
-    void setup();
+//    char *cmdline,**arglist;
+//    int result;
+//    void setup();
 
-    const char *prompt = DEL_PROMPT;
-    setup();
+//    const char *prompt = DEL_PROMPT;
+//    setup();
 
-    while ((cmdline = next_cmd(prompt,stdin)) != NULL) {
-        if((arglist = splitline(cmdline)) != NULL){
-            result = execute4(arglist);
-            freelist(arglist);
+//    while ((cmdline = next_cmd(prompt,stdin)) != NULL) {
+//        if((arglist = splitline(cmdline)) != NULL){
+//            result = execute4(arglist);
+//            freelist(arglist);
+//        }
+//        free(cmdline);
+//    }
+
+//    return a.exec();
+
+    //v5.0
+        char *cmdline,**arglist;
+        int result;
+        void setup();
+
+        const char *prompt = DEL_PROMPT;
+        setup();
+
+        while ((cmdline = next_cmd(prompt,stdin)) != NULL) {
+            if((arglist = splitline(cmdline)) != NULL){
+                result = execute5(arglist);
+                freelist(arglist);
+            }
+            free(cmdline);
         }
-        free(cmdline);
-    }
 
-    return a.exec();
+        return a.exec();
+
 }
 
 void setup(){
